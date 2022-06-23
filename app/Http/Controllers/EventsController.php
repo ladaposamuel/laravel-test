@@ -101,17 +101,13 @@ class EventsController extends BaseController
      */
 
     public function getEventsWithWorkshops() {
-
         $results = [];
         $getEvents = Event::all();
-
-        foreach($getEvents as $key => $value) {
-            $results[$key] = $value;
-            $results[$key]['workshops'] = $value->workshops();
+        foreach($getEvents as $key => $event) {
+            $results[$key] = $event;
+            $results[$key]['workshops'] = $event->workshops();
         }
-
         return $results;
-
     }
 
 
@@ -190,6 +186,12 @@ class EventsController extends BaseController
      */
 
     public function getFutureEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 2');
+        $results = [];
+        $getEvents = Event::futureEvents();
+        foreach($getEvents as $key => $event) {
+            $results[$key] = $event;
+            $results[$key]['workshops'] = $event->workshops();
+        }
+        return $results;
     }
 }
